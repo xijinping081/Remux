@@ -2927,7 +2927,7 @@ retry:
 	restart = &current->restart_block;
 	restart->futex.uaddr = uaddr;
 	restart->futex.val = val;
-	restart->futex.time = abs_time->tv64;
+	restart->futex.time = *abs_time;
 	restart->futex.bitset = bitset;
 	restart->futex.flags = flags | FLAGS_HAS_TIMEOUT;
 #ifdef OPLUS_FEATURE_UIFIRST
@@ -2955,7 +2955,7 @@ static long futex_wait_restart(struct restart_block *restart)
 	ktime_t t, *tp = NULL;
 
 	if (restart->futex.flags & FLAGS_HAS_TIMEOUT) {
-		t.tv64 = restart->futex.time;
+		t = restart->futex.time;
 		tp = &t;
 	}
 	restart->fn = do_no_restart_syscall;
