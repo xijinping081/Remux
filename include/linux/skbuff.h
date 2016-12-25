@@ -3327,7 +3327,7 @@ static inline ktime_t net_timedelta(ktime_t t)
 
 static inline ktime_t net_invalid_timestamp(void)
 {
-	return ktime_set(0, 0);
+	return 0;
 }
 
 static inline u8 skb_metadata_len(const struct sk_buff *skb)
