@@ -3856,7 +3856,6 @@ static void
 dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
 {
 	int update_flags;
-
 	/*
 	 * Update run-time statistics of the 'current'.
 	 */
