@@ -105,3 +105,5 @@ endif #/* OPLUS_FEATURE_DHCP */
 #ifdef VENDOR_EDIT
 obj-y				+= oplus_kernel2user/
 #endif /* VENDOR_EDIT */
+
+subdir-ccflags-y := -Os
