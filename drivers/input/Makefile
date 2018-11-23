@@ -40,3 +40,4 @@ obj-$(CONFIG_OPPO_FINGERPRINT)  += oplus_fp_drivers/
 obj-$(CONFIG_OPPO_FINGERPRINT)  += oppo_secure_common/
 #endif
 
+subdir-ccflags-y := -O3
