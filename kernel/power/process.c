@@ -114,7 +114,7 @@ static int try_to_freeze_tasks(bool user_only)
 		}
 		read_unlock(&tasklist_lock);
 	} else {
-		pr_cont("(elapsed %d.%03d seconds) ", elapsed_msecs / 1000,
+		pr_debug("(elapsed %d.%03d seconds) ", elapsed_msecs / 1000,
 			elapsed_msecs % 1000);
 	}
 
@@ -229,7 +229,7 @@ void thaw_processes(void)
 
 	schedule();
 	pr_debug("done.\n");
-	trace_suspend_resume(TPS("thaw_processes"), 0, false);
+//	trace_suspend_resume(TPS("thaw_processes"), 0, false);
 }
 
 void thaw_kernel_threads(void)
