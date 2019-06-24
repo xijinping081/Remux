@@ -109,17 +109,6 @@ void irq_migrate_all_off_this_cpu(void)
 		raw_spin_lock(&desc->lock);
 		affinity_broken = migrate_one_irq(desc);
 		raw_spin_unlock(&desc->lock);
-//#ifndef OPLUS_FEATURE_CHG_BASIC
-/*		if (affinity_broken)
-			pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
-					    irq, smp_processor_id());*/
-//#else
-		if (oppo_daily_build() == true) {
-			if (affinity_broken)
-				pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
-					    irq, smp_processor_id());
-		}
-//#endif /*OPLUS_FEATURE_CHG_BASIC*/
 	}
 	local_irq_restore(flags);
 }
