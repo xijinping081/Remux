@@ -81,6 +81,10 @@
 #include <linux/kcov.h>
 #include <linux/cpufreq_times.h>
 
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+#include <linux/simple_lmk.h>
+#endif
+
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>
 #include <asm/uaccess.h>
@@ -891,6 +895,9 @@ static inline void __mmput(struct mm_struct *mm)
 	ksm_exit(mm);
 	khugepaged_exit(mm); /* must run before exit_mmap */
 	exit_mmap(mm);
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+	simple_lmk_mm_freed(mm);
+#endif
 	mm_put_huge_zero_page(mm);
 	set_mm_exe_file(mm, NULL);
 	if (!list_empty(&mm->mmlist)) {
