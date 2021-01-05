@@ -137,6 +137,7 @@ static int two_hundred = 200;
 #endif /* CONFIG_OPLUS_MM_HACKS */
 
 static int __maybe_unused one_thousand = 1000;
+static int max_swappiness = 200;
 #ifdef CONFIG_SCHED_WALT
 static int two_million = 2000000;
 #endif
@@ -1702,7 +1703,7 @@ static struct ctl_table vm_table[] = {
 #ifdef CONFIG_OPLUS_MM_HACKS
 		.extra2         = &two_hundred,
 #else
-		.extra2		= &one_hundred,
+		.extra2		= &max_swappiness,
 #endif /* CONFIG_OPLUS_MM_HACKS */
 	},
 #ifdef CONFIG_OPLUS_MM_HACKS
