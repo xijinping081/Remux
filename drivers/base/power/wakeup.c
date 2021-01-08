@@ -1052,7 +1052,7 @@ bool pm_wakeup_pending(void)
         #ifndef OPLUS_FEATURE_POWERINFO_STANDBY
         pr_debug("PM: Wakeup pending, aborting suspend\n");
         #else
-        pr_info("PM: Wakeup pending, aborting suspend\n");
+        pr_debug("PM: Wakeup pending, aborting suspend\n");
         wakeup_reasons_statics(IRQ_NAME_ABORT, WS_CNT_ABORT);
         #endif /* OPLUS_FEATURE_POWERINFO_STANDBY */
 		pm_print_active_wakeup_sources();
