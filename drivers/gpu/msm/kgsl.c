@@ -1011,6 +1011,8 @@ static void kgsl_process_private_close(struct kgsl_device_private *dev_priv,
 	/* Remove the process struct from the master list */
 	list_del(&private->list);
 
+	debugfs_remove_recursive(private->debug_root);
+
 	/*
 	 * Unlock the mutex before releasing the memory and the debugfs
 	 * nodes - this prevents deadlocks with the IOMMU and debugfs
