@@ -325,6 +325,7 @@ static int ctl_elem_read_user(struct snd_card *card,
 	if (err >= 0)
 		err = copy_ctl_value_to_user(userdata, valuep, data,
 					     type, count);
+
  error:
 	kfree(data);
 	return err;
