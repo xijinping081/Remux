@@ -1013,4 +1013,3 @@ void htt_mark_first_wakeup_packet(htt_pdev_handle pdev,
 
 	pdev->cfg.is_first_wakeup_packet = value;
 }
-
