@@ -117,6 +117,23 @@ The default value is defined by CONFIG_ANON_MIN_KBYTES.
 
 ==============================================================
 
+anon_min_kbytes
+
+This knob provides *hard* protection of anonymous pages. The anonymous pages
+on the current node won't be reclaimed under any conditions when their amount
+is below vm.anon_min_kbytes.
+
+This knob may be used to prevent excessive swap thrashing when anonymous
+memory is low (for example, when memory is going to be overfilled by
+compressed data of zram module).
+
+Setting this value too high (close to MemTotal) can result in inability to
+swap and can lead to early OOM under memory pressure.
+
+The default value is defined by CONFIG_ANON_MIN_KBYTES.
+
+==============================================================
+
 block_dump
 
 block_dump enables block I/O debugging when set to a nonzero value. More
