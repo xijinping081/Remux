@@ -41,7 +41,7 @@ config TOUCHPANEL_MULTI_NOFLASH
 config TOUCHPANEL_SYNAPTICS
 #	default y
 	bool "TP Synaptics_IC enable or not for OPPO"
-	---help---
+	help
 	say Y to enable driver for Touchpanel using Synaptics_IC
 
 config TOUCHPANEL_FOCAL
