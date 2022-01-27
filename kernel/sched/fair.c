@@ -141,7 +141,6 @@ unsigned int sysctl_sched_child_runs_first __read_mostly = 1;
  * and reduces their over-scheduling. Synchronous workloads will still
  * have immediate wakeup/sleep latencies.
  */
-
 unsigned int sysctl_sched_wakeup_granularity = 5000000UL;
 unsigned int normalized_sysctl_sched_wakeup_granularity = 5000000UL;
 
