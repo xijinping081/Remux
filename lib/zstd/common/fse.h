@@ -19,7 +19,8 @@
 /*-*****************************************
 *  Dependencies
 ******************************************/
-#include "zstd_deps.h"    /* size_t, ptrdiff_t */
+#include "zstd_deps.h"    /* ptrdiff_t */
+#include <stddef.h>       /* size_t */
 
 /*-*****************************************
 *  FSE_PUBLIC_API : control library symbols visibility
