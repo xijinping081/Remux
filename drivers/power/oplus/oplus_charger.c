@@ -581,7 +581,6 @@ int oplus_battery_set_property(struct power_supply *psy,
 			break;
 #endif
 		default:
-			pr_err("set prop %d is not supported in batt\n", psp);
 			ret = -EINVAL;
 			break;
 	}
@@ -799,7 +798,6 @@ int oplus_battery_get_property(struct power_supply *psy,
 			break;
 #endif
 		default:
-			pr_err("get prop %d is not supported in batt\n", psp);
 			ret = -EINVAL;
 			break;
 	}
