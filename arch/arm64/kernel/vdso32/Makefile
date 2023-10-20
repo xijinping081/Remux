@@ -6,6 +6,9 @@
 
 ifeq ($(cc-name),clang)
   CC_ARM32 := $(CC) --target=arm-linux-gnueabi
+  ifneq ($(LLVM_IAS),1)
+    CC_ARM32 += -no-integrated-as
+  endif
 else
   CC_ARM32 := $(CROSS_COMPILE_COMPAT)$(cc-name)
 endif
