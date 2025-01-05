@@ -892,8 +892,8 @@ isolate_migratepages_block(struct compact_control *cc, unsigned long low_pfn,
 
 isolate_success:
 		list_add(&page->lru, &cc->migratepages);
-		cc->nr_migratepages++;
-		nr_isolated++;
+		cc->nr_migratepages += (1 << compound_order(page));
+		nr_isolated += (1 << compound_order(page));
 
 		/*
 		 * Record where we could have freed pages by migration and not
@@ -905,7 +905,7 @@ isolate_success:
 			cc->last_migrated_pfn = low_pfn;
 
 		/* Avoid isolating too much */
-		if (cc->nr_migratepages == COMPACT_CLUSTER_MAX) {
+		if (cc->nr_migratepages >= COMPACT_CLUSTER_MAX) {
 			++low_pfn;
 			break;
 		}
@@ -1008,7 +1008,7 @@ isolate_migratepages_range(struct compact_control *cc, unsigned long start_pfn,
 		if (!pfn)
 			break;
 
-		if (cc->nr_migratepages == COMPACT_CLUSTER_MAX)
+		if (cc->nr_migratepages >= COMPACT_CLUSTER_MAX)
 			break;
 	}
 
