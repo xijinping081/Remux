@@ -892,8 +892,7 @@ static int msm_wdog_dt_to_pdata(struct platform_device *pdev,
 								__func__);
 		return -ENXIO;
 	}
-	pdata->wakeup_irq_enable = of_property_read_bool(node,
-							 "qcom,wakeup-enable");
+	pdata->wakeup_irq_enable = false;
 
 	if (of_property_read_u32(node, "qcom,scandump-size",
 				 &pdata->scandump_size))
