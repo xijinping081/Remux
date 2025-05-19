@@ -29,6 +29,11 @@ config ZRAM_DEDUP
 	  enabling this option. Experiment shows the positive effect when
 	  the zram is used as blockdev and is used to store build output.
 
+config ZRAM_SIZE_OVERRIDE
+	int "zram size to set from kernel"
+	range 1 8
+	default 2
+
 config ZRAM_WRITEBACK
        bool "Write back incompressible or idle page to backing device"
        depends on ZRAM
