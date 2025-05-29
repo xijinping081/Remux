@@ -38,8 +38,7 @@
 #include <linux/of_batterydata.h>
 #include <linux/msm_bcl.h>
 #include <linux/ktime.h>
-//#include "../../pmic-voter.h"
-#include "../../../../kernel/drivers/power/pmic-voter.h"
+#include "../../pmic-voter.h"
 #include <soc/oppo/boot_mode.h>
 #include "../oplus_vooc.h"
 #include "../oplus_gauge.h"
