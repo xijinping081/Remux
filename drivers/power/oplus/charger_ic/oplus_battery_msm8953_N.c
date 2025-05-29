@@ -38,11 +38,7 @@
 #include <linux/of_batterydata.h>
 #include <linux/msm_bcl.h>
 #include <linux/ktime.h>
-#ifdef CONFIG_OPLUS_SOC_RESTORE_SUPPORT
-#include "../../../../kernel/msm-3.18/drivers/power/pmic-voter.h"
-#else
-#include "../../../../kernel/drivers/power/pmic-voter.h"
-#endif
+#include <linux/pmic-voter.h>
 #include <soc/oppo/boot_mode.h>
 #include "../oplus_vooc.h"
 #include "../oplus_gauge.h"
@@ -8853,58 +8849,11 @@ static int smbchg_otg_disable(void)
 {
 	return 0;
 }
-#ifdef CONFIG_OPLUS_SOC_RESTORE_SUPPORT
-static int oplus_chg_get_shutdown_soc(void)
-{
-	int rc;
-	union power_supply_propval ret = {0, };
 
-	if (!the_chip) {
-		chg_err("[SOC] Chip not ready\n");
-		return 0;
-	}
-
-	if (!the_chip->pmic_spmi.bms_psy) {
-		chg_err("[SOC] No bms psy found\n");
-		return 0;
-	}
-
-	if (the_chip->pmic_spmi.soc_restore_support) {
-		rc = the_chip->pmic_spmi.bms_psy->get_property(the_chip->pmic_spmi.bms_psy, 
-			POWER_SUPPLY_PROP_RESTORE_SOC, &ret);
-		if (rc) {
-			chg_err("[SOC] Bms psy doesn't support SOC restore rc = %d\n",rc);
-			goto restore_soc_err;
-		}
-		rc = ret.intval;
-		if (rc >= 0 && rc <= 100) {
-			chg_debug("[SOC] Get Restored Soc = %d, Val = %d\n", rc, ret.intval);
-			return rc;
-		} else {
-			chg_debug("[SOC] Restored SOC = %d, Error!\n", rc);
-			goto restore_soc_err;
-		}
-	} else {
-		return 0;
-	}
-
-restore_soc_err:
-	rc = the_chip->pmic_spmi.bms_psy->get_property(the_chip->pmic_spmi.bms_psy, 
-		POWER_SUPPLY_PROP_CAPACITY, &ret);
-	if (rc) {
-		chg_err("[SOC] Restore_soc_err, Return Default, rc = %d\n",rc);
-		return 50;
-	}
-	rc = ret.intval;
-	chg_debug("[SOC] Use Fg SOC = %d\n", rc);
-	return rc;
-}
-#else
 static int oplus_chg_get_shutdown_soc(void)
 {
 	return 0;
 }
-#endif
 
 static int oplus_chg_backup_soc(int backup_soc)
 {

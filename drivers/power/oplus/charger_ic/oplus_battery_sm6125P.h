@@ -23,7 +23,7 @@
 #include <linux/usb/class-dual-role.h>
 
 #ifdef VENDOR_EDIT
-#include "../../../../kernel/msm-4.14/drivers/power/supply/qcom/storm-watch.h"
+#include "../../supply/qcom/storm-watch.h"
 #endif
 
 enum print_reason {
