@@ -22,7 +22,7 @@
 #include <linux/extcon.h>
 
 #ifdef VENDOR_EDIT
-#include "../../../../kernel/msm-4.14/drivers/power/supply/qcom/storm-watch.h"
+#include "../../supply/qcom/storm-watch.h"
 #endif
 
 #ifdef VENDOR_EDIT
