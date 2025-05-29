@@ -18,10 +18,10 @@
 #include <linux/regulator/driver.h>
 #include <linux/regulator/consumer.h>
 #include <linux/extcon.h>
-#include "../../../power/supply/qcom/storm-watch.h"
-#include "../../../power/supply/qcom/smb-reg.h"
-#include "../../../power/supply/qcom/battery.h"
-#include "../../../power/supply/qcom/step-chg-jeita.h"
+#include "../../supply/qcom/storm-watch.h"
+#include "../../supply/qcom/smb-reg.h"
+#include "../../supply/qcom/battery.h"
+#include "../../supply/qcom/step-chg-jeita.h"
 
 enum print_reason {
 	PR_INTERRUPT	= BIT(0),
