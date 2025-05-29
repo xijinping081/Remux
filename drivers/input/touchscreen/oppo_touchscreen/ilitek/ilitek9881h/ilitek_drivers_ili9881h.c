@@ -695,7 +695,7 @@ static int ilitek_spi_resume(struct device *dev)
 
 
 static const struct dev_pm_ops tp_pm_ops = {
-#ifdef CONFIG_FB
+#if defined(CONFIG_FB) || defined(CONFIG_DRM_MSM)
     .suspend = ilitek_spi_suspend,
     .resume = ilitek_spi_resume,
 #endif
