@@ -3,9 +3,9 @@
 
 #include <linux/of.h>
 
-#include "../../../../kernel/msm-4.4/drivers/power/supply/qcom/smb-reg.h"
-#include "../../../../kernel/msm-4.4/drivers/power/supply/qcom/storm-watch.h"
-#include "../../../../kernel/msm-4.4/drivers/power/supply/qcom/pmic-voter.h"
+#include "../../supply/qcom/smb-reg.h"
+#include "../../supply/qcom/storm-watch.h"
+#include "../../supply/qcom/pmic-voter.h"
 #include <linux/types.h>
 #include <linux/interrupt.h>
 #include <linux/irqreturn.h>
