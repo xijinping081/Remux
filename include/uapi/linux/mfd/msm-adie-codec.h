@@ -23,18 +23,15 @@
  */
 #define ADIE_CODEC_DIGITAL_ANALOG_READY                            0x1000
 
-
 /*  Client Asks adie to switch off the Analog portion of the
  *  the internal codec. After the use of this path
  */
 #define ADIE_CODEC_ANALOG_OFF                                      0x0750
 
-
 /* Client Asks adie to switch off the digital portion of the
  *  the internal codec. After switching off the analog portion.
  *
  *  0-fill PCM may or maynot be sent at this point
- *
  */
 #define ADIE_CODEC_DIGITAL_OFF                                     0x0600
 
@@ -53,11 +50,12 @@
 
 #define ADIE_CODEC_UNPACK_ENTRY(packed, reg, mask, val) \
 	do { \
-		((reg) = ((packed >> 16) & (0xff))); \
-		((mask) = ((packed >> 8) & (0xff))); \
-		((val) = ((packed) & (0xff))); \
-	} while (0);
+		((reg) = ((packed >> 16) & 0xff)); \
+		((mask) = ((packed >> 8) & 0xff)); \
+		((val) = ((packed) & 0xff)); \
+	} while (0)
 
+/* Data Structures */
 struct adie_codec_action_unit {
 	u32 type;
 	u32 action;
@@ -97,6 +95,12 @@ struct adie_codec_anc_data {
 	u32 writes[];
 };
 
+/*
+ * adie_codec_operations contains function pointers for codec interaction.
+ * These are only meaningful and available in kernel context.
+ */
+#ifdef __KERNEL__
+
 struct adie_codec_operations {
 	int	 codec_id;
 	int (*codec_open)(struct adie_codec_dev_profile *profile,
@@ -116,7 +120,6 @@ struct adie_codec_operations {
 					struct adie_codec_path *path_ptr,
 					u32 num_channels,
 					u32 vol_percentage);
-
 	int (*codec_set_device_analog_volume)(struct adie_codec_path *path_ptr,
 						u32 num_channels,
 						u32 volume);
@@ -124,6 +127,7 @@ struct adie_codec_operations {
 					u8 master);
 };
 
+/* Kernel-only function declarations */
 int adie_codec_register_codec_operations(
 				const struct adie_codec_operations *codec_ops);
 int adie_codec_open(struct adie_codec_dev_profile *profile,
@@ -139,9 +143,10 @@ int adie_codec_enable_anc(struct adie_codec_path *rx_path_ptr, u32 enable,
 	struct adie_codec_anc_data *calibration_writes);
 int adie_codec_set_device_digital_volume(struct adie_codec_path *path_ptr,
 		u32 num_channels, u32 vol_percentage /* in percentage */);
-
 int adie_codec_set_device_analog_volume(struct adie_codec_path *path_ptr,
 		u32 num_channels, u32 volume /* in percentage */);
-
 int adie_codec_set_master_mode(struct adie_codec_path *path_ptr, u8 master);
-#endif
+
+#endif /* __KERNEL__ */
+
+#endif /* __UAPI_MFD_MSM_ADIE_CODEC_H */
