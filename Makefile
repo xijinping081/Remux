@@ -315,9 +315,8 @@ HOSTCC       = gcc
 HOSTCXX      = g++
 endif
 
-HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -Wno-deprecated-declarations -O2 -fomit-frame-pointer -std=gnu89
-HOSTCXXFLAGS = -O2
-HOSTLDFLAGS  += $(HOST_LFS_LDFLAGS)
+HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -std=gnu89
+HOSTCXXFLAGS = -O3
 
 ifeq ($(shell $(HOSTCC) -v 2>&1 | grep -c "clang version"), 1)
 HOSTCFLAGS  += -Wno-unused-value -Wno-unused-parameter \
@@ -385,8 +384,6 @@ DEPMOD		= depmod
 PERL		= perl
 PYTHON		= python
 CHECK		= sparse
-HOSTLDFLAGS	+= -fuse-ld=lld
-HOSTCFLAGS      += -fuse-ld=lld
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
@@ -757,7 +754,7 @@ ARCH_CFLAGS :=
 include arch/$(SRCARCH)/Makefile
 
 ifeq ($(cc-name),clang)
-OPT_FLAGS := -march=armv8.2-a+crypto+crc+nodotprod+lse+fp16
+OPT_FLAGS := -march=armv8.2-a+crypto+crc+nodotprod
 OPT_FLAGS += -mtune=cortex-a75
 ifdef CONFIG_LLVM_POLLY
 OPT_FLAGS += -mllvm -polly \
@@ -786,7 +783,7 @@ else
 OPT_FLAGS += -mllvm -polly-opt-fusion=max
 endif
 
-OPT_FLAGS += -ffp-contract=fast -mllvm -regalloc-enable-advisor=release -mllvm -hot-cold-split=true
+OPT_FLAGS += -ffp-contract=fast -mllvm -hot-cold-split=true
 
 KBUILD_CFLAGS += $(OPT_FLAGS)
 KBUILD_AFLAGS += $(OPT_FLAGS)
