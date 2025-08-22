@@ -454,9 +454,9 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 			if (buffer_size > largest_free_size)
 				largest_free_size = buffer_size;
 		}
-		pr_err("%d: binder_alloc_buf size %zd failed, no address space\n",
+		pr_debug("%d: binder_alloc_buf size %zd failed, no address space\n",
 			alloc->pid, size);
-		pr_err("allocated: %zd (num: %zd largest: %zd), free: %zd (num: %zd largest: %zd)\n",
+		pr_debug("allocated: %zd (num: %zd largest: %zd), free: %zd (num: %zd largest: %zd)\n",
 		       total_alloc_size, allocated_buffers, largest_alloc_size,
 		       total_free_size, free_buffers, largest_free_size);
 		return ERR_PTR(-ENOSPC);
