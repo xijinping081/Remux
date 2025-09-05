@@ -2383,6 +2383,7 @@ void __dl_clear_params(struct task_struct *p)
 }
 
 #ifdef CONFIG_SCHED_BORE
+extern bool sched_bore;
 extern int sched_burst_fork_atavistic;
 extern int sched_burst_cache_lifetime;
 
@@ -2507,7 +2508,7 @@ static inline void inherit_burst(struct task_struct *p) {
 }
 
 static void sched_post_fork_bore(struct task_struct *p) {
-	if (task_burst_inheritable(p))
+	if (task_burst_inheritable(p) && likely(sched_bore))
 		inherit_burst(p);
 	p->se.burst_penalty = p->se.prev_burst_penalty;
 }
