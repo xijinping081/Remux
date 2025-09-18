@@ -1976,15 +1976,14 @@ struct kernel_grip_info *kernel_grip_init(struct device *dev)
         TPD_INFO("grip no handle para using default.\n");
     }
 
-     /* TWEAK: Reduce dead zone width for better edge sensitivity */
     ret = of_property_read_u32_array(dev->of_node, "prevention,dead_area_width", dead_width, 2);
     if (ret) {
-        dead_width[0] = 2; /* Default: 10 */
-        dead_width[1] = 2; /* Default: 10 */
-        TPD_INFO("panel coords using tweaked default.\n");
+        dead_width[0] = 10;
+        dead_width[1] = 10;
+        TPD_INFO("panel coords using default.\n");
     }
 
-     ret = of_property_read_u32_array(dev->of_node, "prevention,makeup_cnt_weight", makeup_para, 5);
+    ret = of_property_read_u32_array(dev->of_node, "prevention,makeup_cnt_weight", makeup_para, 5);
     if (ret) {
         makeup_para[0] = 4;
         makeup_para[1] = 1;
@@ -2109,16 +2108,15 @@ struct kernel_grip_info *kernel_grip_init(struct device *dev)
         TPD_INFO("large corner width using default.\n");
     }
 
-    /* TWEAK: Drastically reduce corner elimination zones for gaming */
     ret = of_property_read_u32_array(dev->of_node, "prevention,eli_area_width", eli_width, 6);
     if (ret) {
-        eli_width[0] = 60;  /* Default: 120 */
-        eli_width[1] = 250; /* Default: 500 */
-        eli_width[2] = 125; /* Default: 250 */
-        eli_width[3] = 60;  /* Default: 120 */
-        eli_width[4] = 125; /* Default: 250 */
-        eli_width[5] = 60;  /* Default: 120 */
-        TPD_INFO("eli area width using tweaked default.\n");
+        eli_width[0] = 120;
+        eli_width[1] = 500;
+        eli_width[2] = 250;
+        eli_width[3] = 120;
+        eli_width[4] = 250;
+        eli_width[5] = 120;
+        TPD_INFO("eli area width using default.\n");
     }
 
     grip_info->grip_handle_in_fw = of_property_read_bool(dev->of_node, "prevention,grip_handle_in_fw");
