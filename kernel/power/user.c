@@ -228,7 +228,9 @@ static long snapshot_ioctl(struct file *filp, unsigned int cmd,
 		if (data->frozen)
 			break;
 
+		pr_debug("Syncing filesystems ... ");
 		sys_sync();
+		pr_debug("done.\n");
 
 		error = freeze_processes();
 		if (error)
