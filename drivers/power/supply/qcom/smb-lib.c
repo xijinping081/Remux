@@ -3391,6 +3391,12 @@ irqreturn_t smblib_handle_debug(int irq, void *data)
 	struct smb_irq_data *irq_data = data;
 	struct smb_charger *chg = irq_data->parent_data;
 
+	/* Disable log for input-current-limiting IRQ */
+    if (irq_data && irq_data->name &&
+        strcmp(irq_data->name, "input-current-limiting") == 0) {
+        return IRQ_HANDLED;
+    }
+
 	smblib_dbg(chg, PR_INTERRUPT, "IRQ: %s\n", irq_data->name);
 	return IRQ_HANDLED;
 }
