@@ -276,7 +276,7 @@ static int suspend_test(int level)
     if (pm_test_level == level) {
 #ifndef VENDOR_EDIT
 //Nanwei.Deng@BSP.CHG.Basic 2018/05/03 modify for power debug
-        pr_info("suspend debug: Waiting for %d second(s).\n",
+        pr_debug("suspend debug: Waiting for %d second(s).\n",
                 pm_test_delay);
 #else
         pr_err("suspend debug: Waiting for %d second(s).\n",
@@ -703,9 +703,9 @@ static int enter_state(suspend_state_t state)
 #ifndef CONFIG_SUSPEND_SKIP_SYNC
 #ifndef VENDOR_EDIT
     trace_suspend_resume(TPS("sync_filesystems"), 0, true);
-    pr_info("PM: Syncing filesystems ... ");
+    pr_debug("PM: Syncing filesystems ... ");
     sys_sync();
-    pr_cont("done.\n");
+    pr_debug("done.\n");
     trace_suspend_resume(TPS("sync_filesystems"), 0, false);
 #else
     error = sys_sync_queue();
@@ -764,7 +764,7 @@ static void pm_suspend_marker(char *annotation)
 	rtc_time_to_tm(ts.tv_sec, &tm);
 #ifndef VENDOR_EDIT
 //Nanwei.Deng@BSP.CHG.Basic 2018/05/03 modify for power debug
-    pr_info("PM: suspend %s %d-%02d-%02d %02d:%02d:%02d.%09lu UTC\n",
+    pr_debug("PM: suspend %s %d-%02d-%02d %02d:%02d:%02d.%09lu UTC\n",
         annotation, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
         tm.tm_hour, tm.tm_min, tm.tm_sec, ts.tv_nsec);
 #else

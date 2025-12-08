@@ -490,7 +490,7 @@ static int __hdd_soc_probe(struct device *dev,
 	QDF_STATUS status;
 	int errno;
 
-	hdd_info("probing driver");
+	hdd_debug("probing driver");
 
 	hdd_soc_load_lock(dev);
 	cds_set_load_in_progress(true);
@@ -598,7 +598,7 @@ static int __hdd_soc_recovery_reinit(struct device *dev,
 {
 	int errno;
 
-	hdd_info("re-probing driver");
+	hdd_debug("re-probing driver");
 
 	hdd_soc_load_lock(dev);
 	cds_set_driver_in_bad_state(false);
@@ -1063,7 +1063,7 @@ static int __wlan_hdd_bus_suspend(struct wow_enable_params wow_params)
 	struct pmo_wow_enable_params pmo_params;
 	int pending;
 
-	hdd_info("starting bus suspend");
+	hdd_debug("starting bus suspend");
 
 	hdd_ctx = cds_get_context(QDF_MODULE_ID_HDD);
 
@@ -1139,7 +1139,7 @@ static int __wlan_hdd_bus_suspend(struct wow_enable_params wow_params)
 	 */
 	pld_request_bus_bandwidth(hdd_ctx->parent_dev, PLD_BUS_WIDTH_NONE);
 
-	hdd_info("bus suspend succeeded");
+	hdd_debug("bus suspend succeeded");
 	return 0;
 
 resume_hif:
@@ -1277,7 +1277,7 @@ int wlan_hdd_bus_resume(void)
 	if (cds_is_driver_recovering())
 		return 0;
 
-	hdd_info("starting bus resume");
+	hdd_debug("starting bus resume");
 
 	if (!hdd_ctx) {
 		hdd_err_rl("hdd context is NULL");
@@ -1342,7 +1342,7 @@ int wlan_hdd_bus_resume(void)
 		goto out;
 	}
 
-	hdd_info("bus resume succeeded");
+	hdd_debug("bus resume succeeded");
 	return 0;
 
 out:
@@ -1859,7 +1859,7 @@ wlan_hdd_pld_uevent(struct device *dev, struct pld_uevent_data *event_data)
 
 	switch (event_data->uevent) {
 	case PLD_FW_DOWN:
-		hdd_info("Received firmware down indication");
+		hdd_info("Received fimrware hang event");
 
 		cds_set_target_ready(false);
 		cds_set_recovery_in_progress(true);
@@ -1888,7 +1888,7 @@ wlan_hdd_pld_uevent(struct device *dev, struct pld_uevent_data *event_data)
 
 		break;
 	case PLD_FW_HANG_EVENT:
-		hdd_info("Received firmware hang event");
+		hdd_debug("Received fimrware hang event");
 		cds_get_recovery_reason(&reason);
 		hang_evt_data.hang_data =
 				qdf_mem_malloc(QDF_HANG_EVENT_DATA_SIZE);
