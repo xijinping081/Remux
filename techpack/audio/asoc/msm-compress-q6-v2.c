@@ -3309,7 +3309,7 @@ static int msm_compr_query_audio_effect_put(struct snd_kcontrol *kcontrol,
 	long *values = &(ucontrol->value.integer.value[0]);
 
 	if (fe_id >= MSM_FRONTEND_DAI_MAX) {
-		pr_err("%s Received out of bounds fe_id %lu\n",
+		pr_debug("%s Received out of bounds fe_id %lu\n",
 			__func__, fe_id);
 		return -EINVAL;
 	}

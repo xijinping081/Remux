@@ -74,7 +74,7 @@ static bool migrate_one_irq(struct irq_desc *desc)
 	} else {
 		int r = irq_set_affinity_locked(d, affinity, false);
 		if (r)
-			pr_warn_ratelimited("IRQ%u: set affinity failed(%d).\n",
+			pr_debug_ratelimited("IRQ%u: set affinity failed(%d).\n",
 					    d->irq, r);
 	}
 
@@ -116,7 +116,7 @@ void irq_migrate_all_off_this_cpu(void)
 //#else
 		if (oppo_daily_build() == true) {
 			if (affinity_broken)
-				pr_warn_ratelimited("IRQ%u no longer affine to CPU%u\n",
+				pr_debug_ratelimited("IRQ%u no longer affine to CPU%u\n",
 					    irq, smp_processor_id());
 		}
 //#endif /*OPLUS_FEATURE_CHG_BASIC*/
