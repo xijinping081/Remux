@@ -7706,13 +7706,6 @@ remove_sdev_boot:
 remove_sdev_ufs_device:
 	scsi_remove_device(hba->sdev_ufs_device);
 out:
-#ifdef VENDOR_EDIT
-	strncpy(temp_version, hba->sdev_ufs_device->rev, 4);
-	strncpy(vendor, hba->sdev_ufs_device->vendor, 8);
-	strncpy(model, hba->sdev_ufs_device->model, 16);
-	register_device_proc("ufs_version", temp_version, vendor);
-	register_device_proc("ufs", model, vendor);
-#endif
 	return ret;
 }
 
