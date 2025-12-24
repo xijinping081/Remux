@@ -1,23 +1,24 @@
 /*
- * Author: andip71, 01.09.2017
- *
- * Version 1.1.0
- *
- * This software is licensed under the terms of the GNU General Public
- * License version 2, as published by the Free Software Foundation, and
- * may be copied, distributed, and modified under those terms.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
+ * Boeffla Wakelock Blocker v2.0.0
  */
 
-#define BOEFFLA_WL_BLOCKER_VERSION	"1.1.0"
+#ifndef _BOEFFLA_WL_BLOCKER_H
+#define _BOEFFLA_WL_BLOCKER_H
 
-#define LIST_WL_DEFAULT			"IPA_WS;IPA_RM12;NETLINK;netmgr_wl;qcom_rx_wakelock;[timerfd];wcnss_filter_lock;wlan;wlan_extscan_wl;wlan_ipa;wlan_pno_wl;wlan_wow_wl"
+#include <linux/types.h>
 
-#define LENGTH_LIST_WL			255
-#define LENGTH_LIST_WL_DEFAULT		125
-#define LENGTH_LIST_WL_SEARCH		LENGTH_LIST_WL + LENGTH_LIST_WL_DEFAULT + 5
+#define BOEFFLA_WL_BLOCKER_VERSION "2.0.0-Refactored"
+
+// Default wakelocks to block. Semicolon separated.
+#define LIST_WL_DEFAULT "qcom_rx_wakelock;wlan;NETLINK;netmgr_wl;wcnss_filter_lock;smd_channel_loop;ipa_power"
+
+// Max length for the user-configurable list
+#define LENGTH_LIST_WL 255
+// Max length for the default list
+#define LENGTH_LIST_WL_DEFAULT 125
+
+// Forward declaration of the main blocker function
+struct wakeup_source;
+bool check_for_block(struct wakeup_source *ws);
+
+#endif // _BOEFFLA_WL_BLOCKER_H
