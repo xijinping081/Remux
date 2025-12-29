@@ -7,7 +7,7 @@
 
 #include <linux/types.h>
 
-#define BOEFFLA_WL_BLOCKER_VERSION "2.0.0-Refactored"
+#define BOEFFLA_WL_BLOCKER_VERSION "2.1.0-Optimized"
 
 // Default wakelocks to block. Semicolon separated.
 #define LIST_WL_DEFAULT "qcom_rx_wakelock;wlan;NETLINK;netmgr_wl;wcnss_filter_lock;smd_channel_loop;ipa_power"
