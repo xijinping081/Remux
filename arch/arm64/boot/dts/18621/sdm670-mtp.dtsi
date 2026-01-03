@@ -124,6 +124,7 @@
 //#endif /* OPLUS_FEATURE_CHG_BASIC */
 &qupv3_se10_i2c {
 	status = "ok";
+	qcom,clk-freq-out = <400000>;
 };
 
 &qupv3_se6_4uart {
@@ -186,6 +187,7 @@
 /* #ifdef OPLUS_ARCH_EXTENDS */
 &qupv3_se4_i2c {
 	status = "okay";
+	qcom,clk-freq-out = <400000>;
 	tfa98xx@35 {
 		compatible = "nxp,tfa98xx";
 		reg = <0x35>;
