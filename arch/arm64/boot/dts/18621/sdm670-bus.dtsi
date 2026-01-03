@@ -339,6 +339,7 @@
 			qcom,fab-dev;
 			qcom,base-name = "camnoc_virt-base";
 			qcom,bypass-qos-prg;
+			qcom,bus-type = <1>;
 			clocks = <>;
 		};
 
@@ -378,6 +379,7 @@
 			qcom,fab-dev;
 			qcom,base-name = "ipa_virt-base";
 			qcom,bypass-qos-prg;
+			qcom,bus-type = <1>;
 			clocks = <>;
 		};
 
@@ -387,6 +389,7 @@
 			qcom,fab-dev;
 			qcom,base-name = "mc_virt-base";
 			qcom,bypass-qos-prg;
+			qcom,bus-type = <1>;
 			clocks = <>;
 		};
 
@@ -429,6 +432,7 @@
 			qcom,fab-dev;
 			qcom,base-name = "mc_virt-base";
 			qcom,bypass-qos-prg;
+			qcom,bus-type = <1>;
 			clocks = <>;
 		};
 
