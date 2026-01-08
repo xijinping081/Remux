@@ -27,6 +27,8 @@
 #endif
 
 #include <linux/spi/spi.h>
+#include <linux/irq.h>
+#include <linux/irqdesc.h>
 
 
 #include "hx83112a_noflash.h"
@@ -6265,13 +6267,9 @@ static int hx83112a_nf_reset(void *chip_data)
     struct chip_data_hx83112a_nf *chip_info = (struct chip_data_hx83112a_nf *)chip_data;
     int ret = 0;
     int load_fw_times = 10;
+    struct irq_desc *desc;
 
     TPD_INFO("%s.\n", __func__);
-
-    //if (!chip_info->first_download_finished) {
-    //    TPD_INFO("%s:First download has not finished, don't do reset.\n", __func__);
-    //    return 0;
-    //}
 
     hx83112a_nf_zero_event_count = 0;
 
@@ -6279,9 +6277,13 @@ static int hx83112a_nf_reset(void *chip_data)
     //esd hw reset
     HX83112A_NF_ESD_RESET_ACTIVATE = 0;
 
-    //hx83112a_nf_enable_interrupt(hx83112a_nf_chip_info, false);
-    disable_irq_nosync(chip_info->hx_irq);
-
+    /* FIX: Check IRQ status before disabling */
+    if (chip_info->hx_irq) {
+        desc = irq_to_desc(chip_info->hx_irq);
+        if (desc && !irqd_irq_disabled(&desc->irq_data)) {
+            disable_irq_nosync(chip_info->hx_irq);
+        }
+    }
 
     do {
         load_fw_times--;
@@ -6294,8 +6296,16 @@ static int hx83112a_nf_reset(void *chip_data)
     }
     hx83112a_nf_sense_on(0x00);
 
-    enable_irq(chip_info->hx_irq);
-    //hx83112a_nf_enable_interrupt(hx83112a_nf_chip_info, true);
+    /* FIX: Check IRQ status before enabling */
+    if (chip_info->hx_irq) {
+        desc = irq_to_desc(chip_info->hx_irq);
+        if (desc && irqd_irq_disabled(&desc->irq_data)) {
+            enable_irq(chip_info->hx_irq);
+        } else {
+             TPD_INFO("%s: IRQ already enabled, skipping enable\n", __func__);
+        }
+    }
+
     //esd hw reset
     return ret;
 }
@@ -8020,7 +8030,6 @@ static void hx83112a_nf_init_oppo_apk_op(struct touchpanel_data *ts)
     }
 }
 #endif // end of CONFIG_OPPO_TP_APK
-
 
 static int hx83112a_nf_tp_probe(struct spi_device *spi)
 {
