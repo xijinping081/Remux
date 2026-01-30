@@ -10541,15 +10541,24 @@ static void smbchg_aicl_enable(bool enable)
 }
 static void smbchg_usbin_collapse_irq_enable(bool enable)
 {
-	static bool collapse_en = true;
 	struct oplus_chg_chip *chip = g_oplus_chip;
+	int irq = chip->pmic_spmi.smb2_chip->chg.irq_info[USBIN_COLLAPSE_IRQ].irq;
+	struct irq_data *irqd = irq_get_irq_data(irq);
 
-	if (enable && !collapse_en){
-		enable_irq(chip->pmic_spmi.smb2_chip->chg.irq_info[USBIN_COLLAPSE_IRQ].irq);
-	}else if (!enable && collapse_en){
-		disable_irq(chip->pmic_spmi.smb2_chip->chg.irq_info[USBIN_COLLAPSE_IRQ].irq);
+	if (!irqd) {
+		pr_err("OPLUS_CHG: irq_data not found for IRQ %d\n", irq);
+		return;
 	}
-	collapse_en = enable;
+
+    if (enable) {
+		if (irqd_irq_disabled(irqd)) {
+			enable_irq(irq);
+		}
+	} else {
+		if (!irqd_irq_disabled(irqd)) {
+			disable_irq(irq);
+		}
+	}
 }
 static void smbchg_rerun_aicl(void)
 {
