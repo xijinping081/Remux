@@ -21,3 +21,10 @@
 	/*oppo,prjversion. first one is the count of projects*/
 	oppo,prjversion = <1 18621>;
 };
+
+&qupv3_se2_spi {
+	status = "disabled";
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+	/delete-property/ pinctrl-1;
+};
