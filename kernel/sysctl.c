@@ -143,7 +143,7 @@ static int two_million = 2000000;
 #endif
 
 #if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_FG_IO_OPT)
-unsigned int sysctl_fg_io_opt = 1;
+unsigned int sysctl_fg_io_opt = 0;
 #endif
 
 #ifdef VENDOR_EDIT
