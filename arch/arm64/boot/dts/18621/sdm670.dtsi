@@ -46,7 +46,7 @@
 	};
 
 	chosen {
-		bootargs = "rcupdate.rcu_expedited=1 core_ctl_disable_cpumask=6-7";
+		bootargs = "quiet rcupdate.rcu_normal_after_boot=1 console=0 cgroup.memory=nokmem,nosocket cgroup_disable=pressure noirqdebug norandmaps nosoftlockup mce=ignore_ce rcu_nocbs=0-7 core_ctl_disable_cpumask=0-7";
 	};
 
 	cpus {
@@ -57,6 +57,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x0>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -93,6 +94,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x100>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -124,6 +126,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x200>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -155,6 +158,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x300>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -186,6 +190,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x400>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -217,6 +222,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x500>;
+			clock-frequency = <1708800000>;
 			enable-method = "psci";
 			efficiency = <1024>;
 			cache-size = <0x10000>;
@@ -248,6 +254,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x600>;
+			clock-frequency = <2208000000>;
 			enable-method = "psci";
 			efficiency = <1740>;
 			cache-size = <0x20000>;
@@ -279,6 +286,7 @@
 			device_type = "cpu";
 			compatible = "arm,armv8";
 			reg = <0x0 0x700>;
+			clock-frequency = <2208000000>;
 			enable-method = "psci";
 			efficiency = <1740>;
 			cache-size = <0x20000>;
@@ -739,24 +747,17 @@
 			label = "dfps_data_region";
 		};
 
-		dump_mem: mem_dump_region {
-			compatible = "shared-dma-pool";
-			reusable;
-			size = <0 0x2400000>;
-		};
+		ramoops: ramoops@0x0xB7E00000 {
+        	compatible = "ramoops";
+        	reg = <0 0xB7E00000 0 0x00400000>;
 
-                // #ifdef VENDOR_EDIT
-                // #endif
-                ramoops: ramoops@0x0xB7E00000 {
-                compatible = "ramoops";
-                reg = <0 0xB7E00000 0 0x00400000>;
-                record-size =  <0x40000>; //256x1024
-                console-size = <0x40000>;
-                ftrace-size =  <0x40000>;
-                pmsg-size=         <0x200000>;
-                devinfo-size=  <0x01000>;
-                ecc-size=          <0x0>;
-                };
+        	record-size =  <0x40000>; //256x1024
+        	console-size = <0x40000>;
+        	ftrace-size =  <0x40000>;
+        	pmsg-size=         <0x200000>;
+        	devinfo-size=  <0x01000>;
+        	ecc-size=          <0x0>;
+        };
 
 // #ifdef OPLUS_BUG_STABILITY
 // Add for get current xlb_uefi log, add reserved size 1M for kernelboot xbl uefis
@@ -790,8 +791,6 @@
 
 #include "sdm670-qupv3.dtsi"
 
-#include "sdm670-coresight.dtsi"
-
 #include "sdm670-vidc.dtsi"
 
 #include "sdm670-sde-pll.dtsi"
@@ -813,6 +812,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU0>;
+		status = "disabled";
 	};
 
 	jtag_mm1: jtagmm@7140000 {
@@ -824,6 +824,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU1>;
+		status = "disabled";
 	};
 
 	jtag_mm2: jtagmm@7240000 {
@@ -835,6 +836,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU2>;
+		status = "disabled";
 	};
 
 	jtag_mm3: jtagmm@7340000 {
@@ -846,6 +848,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU3>;
+		status = "disabled";
 	};
 
 	jtag_mm4: jtagmm@7440000 {
@@ -857,6 +860,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU4>;
+		status = "disabled";
 	};
 
 	jtag_mm5: jtagmm@7540000 {
@@ -868,6 +872,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU5>;
+		status = "disabled";
 	};
 
 	jtag_mm6: jtagmm@7640000 {
@@ -879,6 +884,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU6>;
+		status = "disabled";
 	};
 
 	jtag_mm7: jtagmm@7740000 {
@@ -890,6 +896,7 @@
 		clock-names = "core_clk";
 
 		qcom,coresight-jtagmm-cpu = <&CPU7>;
+		status = "disabled";
 	};
 
 	intc: interrupt-controller@17a00000 {
@@ -1567,66 +1574,6 @@
 		qcom,l1_tlb_dump700 {
 			qcom,dump-node = <&L1_TLB_700>;
 			qcom,dump-id = <0x27>;
-		};
-	};
-
-	mem_dump: mem_dump {
-		compatible = "qcom,mem-dump";
-		memory-region = <&dump_mem>;
-
-		rpmh {
-			qcom,dump-size = <0x2000000>;
-			qcom,dump-id = <0xec>;
-		};
-
-		fcm {
-			qcom,dump-size = <0x8400>;
-			qcom,dump-id = <0xee>;
-		};
-
-		rpm_sw {
-			qcom,dump-size = <0x28000>;
-			qcom,dump-id = <0xea>;
-		};
-
-		pmic {
-			qcom,dump-size = <0x10000>;
-			qcom,dump-id = <0xe4>;
-		};
-
-		tmc_etf {
-			qcom,dump-size = <0x10000>;
-			qcom,dump-id = <0xf0>;
-		};
-
-		tmc_etfswao {
-			qcom,dump-size = <0x8400>;
-			qcom,dump-id = <0xf1>;
-		};
-
-		tmc_etr_reg {
-			qcom,dump-size = <0x1000>;
-			qcom,dump-id = <0x100>;
-		};
-
-		tmc_etf_reg {
-			qcom,dump-size = <0x1000>;
-			qcom,dump-id = <0x101>;
-		};
-
-		etfswao_reg {
-			qcom,dump-size = <0x1000>;
-			qcom,dump-id = <0x102>;
-		};
-
-		misc_data {
-			qcom,dump-size = <0x1000>;
-			qcom,dump-id = <0xe8>;
-		};
-
-		power_regs {
-			qcom,dump-size = <0x100000>;
-			qcom,dump-id = <0xed>;
 		};
 	};
 
