@@ -59,7 +59,7 @@
 			reg = <0x0 0x0>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_0>;
@@ -96,7 +96,7 @@
 			reg = <0x0 0x100>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_100>;
@@ -128,7 +128,7 @@
 			reg = <0x0 0x200>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_200>;
@@ -160,7 +160,7 @@
 			reg = <0x0 0x300>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_300>;
@@ -192,7 +192,7 @@
 			reg = <0x0 0x400>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_400>;
@@ -224,7 +224,7 @@
 			reg = <0x0 0x500>;
 			clock-frequency = <1708800000>;
 			enable-method = "psci";
-			efficiency = <1024>;
+			efficiency = <612>;
 			cache-size = <0x10000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_500>;
@@ -256,7 +256,7 @@
 			reg = <0x0 0x600>;
 			clock-frequency = <2208000000>;
 			enable-method = "psci";
-			efficiency = <1740>;
+			efficiency = <1024>;
 			cache-size = <0x20000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_600>;
@@ -288,7 +288,7 @@
 			reg = <0x0 0x700>;
 			clock-frequency = <2208000000>;
 			enable-method = "psci";
-			efficiency = <1740>;
+			efficiency = <1024>;
 			cache-size = <0x20000>;
 			cpu-release-addr = <0x0 0x90000000>;
 			next-level-cache = <&L2_700>;
@@ -357,47 +357,42 @@
 
 		CPU_COST_0: core-cost0 {
 			busy-cost-data = <
-				 300000    14
-				 576000    25
-				 748800    31
-				 998400    46
-				1209600    57
-				1324800    84
-				1516800    96
-				1612800   114
-				1708800   139
+				 300000    73
+				 576000    81
+				 748800    84
+				 998400   107
+				1209600   110
+				1324800   128
+				1516800   131
+				1612800   142
+				1708800   162
 			>;
 			idle-cost-data = <
 				12 10 8 6 4
 			>;
 		};
+
 		CPU_COST_1: core-cost1 {
 			busy-cost-data = <
-				 300000    256
-				 652800    307
-				 825600    332
-				 979200    382
-				1132800    408
-				1363200    448
-				1536000    586
-				1747200    641
-				1843200    659
-				1996800    696
-				2016000    865
-				2054400    876
-				2169600    900
-				2208000    924
-				2304000    940
-				2361600    948
-				2400000   1170
-				2457600   1200
-				2515200   1300
-				2611200   1400
+				 300000     82
+				 652800    123
+				 825600    170
+				 979200    180
+				1132800    210
+				1363200    267
+				1536000    323
+				1747200    394
+				1843200    403
+				1996800    472
+				2054400    510
+				2169600    614
+				2208000    692
 			>;
 			idle-cost-data = <
 				100 80 60 40 20
 			>;
 		};
+
 		CLUSTER_COST_0: cluster-cost0 {
 			busy-cost-data = <
 				 300000    6
@@ -414,6 +409,7 @@
 				5 4 3 2 1
 			>;
 		};
+
 		CLUSTER_COST_1: cluster-cost1 {
 			busy-cost-data = <
 				 300000    25
@@ -426,16 +422,9 @@
 				1747200    64
 				1843200    65
 				1996800    69
-				2016000    85
 				2054400    87
 				2169600    90
 				2208000    92
-				2304000    93
-				2361600    94
-				2400000   117
-				2457600   120
-				2515200   130
-				2611200   140
 			>;
 			idle-cost-data = <
 				5 4 3 2 1
@@ -777,7 +766,7 @@
 			alloc-ranges = <0 0x00000000 0 0xffffffff>;
 			reusable;
 			alignment = <0 0x400000>;
-			size = <0 0x2000000>;
+			size = <0 0x8000000>;
 			linux,cma-default;
 		};
 	};
@@ -3231,4 +3220,27 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&nx30p6093_intr_default>;
 	};
+};
+
+/* sdm670.dtsi */
+&clock_cpucc {
+	qcom,cpufreq-table-0 =
+		<576000>,
+		<748800>,
+		<998400>,
+		<1209600>,
+		<1324800>,
+		<1516800>,
+		<1612800>,
+		<1708800>;
+
+	qcom,cpufreq-table-6 =
+		<652800>,
+		<825600>,
+		<1132800>,
+		<1363200>,
+		<1536000>,
+		<1843200>,
+		<2169600>,
+		<2208000>;
 };
