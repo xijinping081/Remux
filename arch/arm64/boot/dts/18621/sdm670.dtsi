@@ -389,7 +389,7 @@
 				2208000    692
 			>;
 			idle-cost-data = <
-				100 80 60 40 20
+				30 25 20 15 10
 			>;
 		};
 
@@ -2063,7 +2063,7 @@
 
 		/* PM QoS */
 		qcom,pm-qos-cpu-groups = <0x3f 0xC0>;
-		qcom,pm-qos-cpu-group-latency-us = <67 67>;
+		qcom,pm-qos-cpu-group-latency-us = <100 100>;
 		qcom,pm-qos-default-cpu = <0>;
 
 		pinctrl-names = "dev-reset-assert", "dev-reset-deassert";
