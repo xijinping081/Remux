@@ -309,6 +309,17 @@ config NET_SCH_PIE
 
 	  If unsure, say N.
 
+config NET_SCH_CAKE
+	tristate "Common Applications Kept Enhanced (CAKE)"
+	help
+	  Say Y here if you want to use the Common Applications Kept Enhanced
+	  (CAKE) queue management algorithm.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called sch_cake.
+
+	  If unsure, say N.
+
 config NET_SCH_INGRESS
 	tristate "Ingress/classifier-action Qdisc"
 	depends on NET_CLS_ACT
@@ -386,6 +397,9 @@ choice
 
 	config DEFAULT_PFIFO_FAST
 		bool "Priority FIFO Fast"
+
+	config DEFAULT_CAKE
+		bool "Common Applications Kept Enhanced" if NET_SCH_CAKE
 endchoice
 
 config DEFAULT_NET_SCH
@@ -394,7 +408,7 @@ config DEFAULT_NET_SCH
 	default "fq" if DEFAULT_FQ
 	default "fq_codel" if DEFAULT_FQ_CODEL
 	default "sfq" if DEFAULT_SFQ
-	default "pfifo_fast"
+	default "cake" if DEFAULT_CAKE
 endif
 
 comment "Classification"
