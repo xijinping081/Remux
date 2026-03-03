@@ -266,7 +266,7 @@
          *2:touchpanel,button-map
          *type (X1,Y1)(X2,Y2)(X3,Y3)(Width_X,Hight_Y)--Only when button-type is 0
          */
-        touchpanel,button-type = <4>;
+        touchpanel,button-type = <4 0>;
         touchpanel.button-TRx = <0 0>;
     };
 };
