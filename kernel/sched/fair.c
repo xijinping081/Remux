@@ -12252,6 +12252,9 @@ void check_for_migration(struct rq *rq, struct task_struct *p)
 	if (rq->misfit_task || (sysctl_uifirst_enabled && sysctl_slide_boost_enabled &&
 					p->static_ux == 2 && ux_task_misfit(p, cpu))) {
 #else
+	if (IS_ENABLED(CONFIG_SCHED_CASS))
+		return;
+
 	if (rq->misfit_task) {
 #endif
 		if (rq->curr->state != TASK_RUNNING ||
