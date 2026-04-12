@@ -46,7 +46,7 @@
 	};
 
 	chosen {
-		bootargs = "quiet rcupdate.rcu_normal_after_boot=1 console=0 cgroup.memory=nokmem,nosocket cgroup_disable=pressure noirqdebug norandmaps nosoftlockup mce=ignore_ce rcu_nocbs=0-7 core_ctl_disable_cpumask=0-7";
+		bootargs = "quiet rcupdate.rcu_expedited=1 console=0 cgroup.memory=nokmem,nosocket cgroup_disable=pressure noirqdebug norandmaps nosoftlockup mce=ignore_ce core_ctl_disable_cpumask=6-7";
 	};
 
 	cpus {
